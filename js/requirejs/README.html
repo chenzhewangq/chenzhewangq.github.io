@@ -1,0 +1,31 @@
+<h1 id="RequireJS"><a href="#RequireJS" class="headerlink" title="RequireJS"></a>RequireJS</h1><p>RequireJS loads plain JavaScript files as well as more defined modules. It is<br>optimized for in-browser use, including in<br><a href="http://requirejs.org/docs/api.html#webworker">a Web Worker</a>, but it can be used<br>in other JavaScript environments, like Rhino and<br><a href="http://requirejs.org/docs/node.html">Node</a>. It implements the<br><a href="https://github.com/amdjs/amdjs-api/wiki/AMD">Asynchronous Module</a><br>API.</p>
+<p>RequireJS uses plain script tags to load modules/files, so it should allow for<br>easy debugging. It can be used<br><a href="http://requirejs.org/docs/api.html#jsfiles">simply to load existing JavaScript files</a>,<br>so you can add it to your existing project without having to re-write your<br>JavaScript files.</p>
+<p>RequireJS includes <a href="http://requirejs.org/docs/optimization.html">an optimization tool</a><br>you can run as part of your packaging steps for deploying your code. The<br>optimization tool can combine and minify your JavaScript files to allow for<br>better performance.</p>
+<p>If the JavaScript file defines a JavaScript module via<br><a href="http://requirejs.org/docs/api.html#define">define()</a>, then there are other benefits<br>RequireJS can offer: <a href="http://requirejs.org/docs/commonjs.html">improvements over traditional CommonJS modules</a><br>and <a href="http://requirejs.org/docs/api.html#multiversion">loading multiple versions</a><br>of a module in a page. RequireJS also has a plugin system that supports features like<br><a href="http://requirejs.org/docs/api.html#i18n">i18n string bundles</a>, and<br><a href="http://requirejs.org/docs/api.html#text">text file dependencies</a>.</p>
+<p>RequireJS does not have any dependencies on a JavaScript framework.</p>
+<p>RequireJS works in IE 6+, Firefox 2+, Safari 3.2+, Chrome 3+, and Opera 10+.</p>
+<p><a href="http://requirejs.org/docs/download.html">Latest Release</a></p>
+<h2 id="License"><a href="#License" class="headerlink" title="License"></a>License</h2><p>MIT</p>
+<h2 id="Code-of-Conduct"><a href="#Code-of-Conduct" class="headerlink" title="Code of Conduct"></a>Code of Conduct</h2><p><a href="https://jquery.org/conduct/">jQuery Foundation Code of Conduct</a>.</p>
+<h2 id="Directories"><a href="#Directories" class="headerlink" title="Directories"></a>Directories</h2><ul>
+<li><strong>dist</strong>: Scripts and assets to generate the requirejs.org docs, and for<br>generating a require.js release.</li>
+<li><strong>docs</strong>: The raw HTML files for the requirejs.org docs. Only includes the<br>body of each page. Files in <strong>dist</strong> are used to generate a complete HTML page.</li>
+<li><strong>tests</strong>: Tests for require.js.</li>
+<li><strong>testBaseUrl.js</strong>: A file used in the tests inside <strong>tests</strong>. Purposely<br>placed outside the tests directory for testing paths that go outside a baseUrl.</li>
+<li><strong>updatesubs.sh</strong>: Updates projects that depend on require.js Assumes the<br>projects are siblings to this directory and have specific names. Useful to<br>copy require.js to dependent projects easily while in development.</li>
+</ul>
+<h2 id="Tests"><a href="#Tests" class="headerlink" title="Tests"></a>Tests</h2><p>This repo assumes some other repos are checked out as siblings to this repo:</p>
+<pre><code>git clone https://github.com/requirejs/text.git
+git clone https://github.com/requirejs/i18n.git
+git clone https://github.com/requirejs/domReady.git
+git clone https://github.com/requirejs/requirejs.git
+</code></pre><p>So when the above clones are done, the directory structure should look like:</p>
+<ul>
+<li>domReady</li>
+<li>i18n</li>
+<li>text</li>
+<li>requirejs (this repo)</li>
+</ul>
+<p>You will need to be connected to the internet because the JSONP and<br>remoteUrls tests access the internet to complete their tests.</p>
+<p>Serve the directory with these 4 siblings from a web server. It can be a local web server.</p>
+<p>Open requirejs/tests/index.html in all the browsers, click the arrow button to run all<br>the tests.</p>

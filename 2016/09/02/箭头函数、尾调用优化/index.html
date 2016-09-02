@@ -42,7 +42,7 @@ var f = function(num1, num2){
 
 var f = () =&amp;gt; 5;
 var f">
-<meta property="og:updated_time" content="2016-09-02T06:57:51.273Z">
+<meta property="og:updated_time" content="2016-09-02T06:59:52.351Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="箭头函数、尾调用优化">
 <meta name="twitter:description" content="一、基本用法// 单个参数
@@ -276,7 +276,6 @@ var f = function(num1, num2){
 var f = () =&gt; 5;
 var f = (num1, num2) =&gt; num1 + num2;
 
-&lt;!-- more --&gt;
 
 // 返回一个对象，必须在对象外面加上括号
 var getTempItem = if =&gt; ({ id: id, name: &quot;Temp&quot;});
@@ -296,7 +295,8 @@ function full(person){
 })
 // 箭头函数写法
 [1,2,3].map(x =&gt; x*x);
-</code></pre><h3 id="二、使用注意点"><a href="#二、使用注意点" class="headerlink" title="二、使用注意点"></a>二、使用注意点</h3><ul>
+</code></pre> <a id="more"></a>
+<h3 id="二、使用注意点"><a href="#二、使用注意点" class="headerlink" title="二、使用注意点"></a>二、使用注意点</h3><ul>
 <li>函数体内的this对象就是定义时所在的对象，而不是使用时所在的对象。</li>
 <li>不可以当作构造函数。也就是说不可以使用new命令，否则会抛出一个错误。</li>
 <li>不可以使用arguments对象，该对象在函数体内不存在。如果要用，可以用rest参数代替。</li>

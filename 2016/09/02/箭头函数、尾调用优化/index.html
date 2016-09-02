@@ -4,24 +4,63 @@
   <meta charset="utf-8">
   
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
-  <title>模版字符串（适用于字符串拼接） | 丶卖纸巾的老司机</title>
+  <title>箭头函数、尾调用优化 | 丶卖纸巾的老司机</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="模版字符串（template string）是增强版的字符串，用反引号（`）标识，常用语字符串的拼接或者在字符串中添加变量
-一、使用1.用反引号（`）表示；
-2.变量名写在${}中；">
+  <meta name="description" content="一、基本用法// 单个参数
+var f = function(v){
+    return v;
+};
+
+var f = v =&amp;gt; v;
+
+
+// 多个参数或者不需要参数
+var f = function(){retun 5;}
+var f = function(num1, num2){
+    return num1 + num2;
+}
+
+var f = () =&amp;gt; 5;
+var f">
 <meta property="og:type" content="article">
-<meta property="og:title" content="模版字符串（适用于字符串拼接）">
-<meta property="og:url" content="http://yoursite.com/2016/09/01/模版字符串（适用于字符串拼接）/index.html">
+<meta property="og:title" content="箭头函数、尾调用优化">
+<meta property="og:url" content="http://yoursite.com/2016/09/02/箭头函数、尾调用优化/index.html">
 <meta property="og:site_name" content="丶卖纸巾的老司机">
-<meta property="og:description" content="模版字符串（template string）是增强版的字符串，用反引号（`）标识，常用语字符串的拼接或者在字符串中添加变量
-一、使用1.用反引号（`）表示；
-2.变量名写在${}中；">
-<meta property="og:updated_time" content="2016-09-01T02:12:30.676Z">
+<meta property="og:description" content="一、基本用法// 单个参数
+var f = function(v){
+    return v;
+};
+
+var f = v =&amp;gt; v;
+
+
+// 多个参数或者不需要参数
+var f = function(){retun 5;}
+var f = function(num1, num2){
+    return num1 + num2;
+}
+
+var f = () =&amp;gt; 5;
+var f">
+<meta property="og:updated_time" content="2016-09-02T06:57:51.273Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="模版字符串（适用于字符串拼接）">
-<meta name="twitter:description" content="模版字符串（template string）是增强版的字符串，用反引号（`）标识，常用语字符串的拼接或者在字符串中添加变量
-一、使用1.用反引号（`）表示；
-2.变量名写在${}中；">
+<meta name="twitter:title" content="箭头函数、尾调用优化">
+<meta name="twitter:description" content="一、基本用法// 单个参数
+var f = function(v){
+    return v;
+};
+
+var f = v =&amp;gt; v;
+
+
+// 多个参数或者不需要参数
+var f = function(){retun 5;}
+var f = function(num1, num2){
+    return num1 + num2;
+}
+
+var f = () =&amp;gt; 5;
+var f">
   
     <link rel="alternative" href="/atom.xml" title="丶卖纸巾的老司机" type="application/atom+xml">
   
@@ -183,11 +222,11 @@
 	</div>
 </nav>
 
-      <div class="body-wrap"><article id="post-模版字符串（适用于字符串拼接）" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-箭头函数、尾调用优化" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2016/09/01/模版字符串（适用于字符串拼接）/" class="article-date">
-  	<time datetime="2016-09-01T02:11:40.000Z" itemprop="datePublished">2016-09-01</time>
+      <a href="/2016/09/02/箭头函数、尾调用优化/" class="article-date">
+  	<time datetime="2016-09-02T06:56:59.000Z" itemprop="datePublished">2016-09-02</time>
 </a>
     </div>
   
@@ -200,7 +239,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      模版字符串（适用于字符串拼接）
+      箭头函数、尾调用优化
     </h1>
   
 
@@ -220,62 +259,101 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p><strong>模版字符串（template string）是增强版的字符串，用反引号（`）标识，常用语字符串的拼接或者在字符串中添加变量</strong></p>
-<h3 id="一、使用"><a href="#一、使用" class="headerlink" title="一、使用"></a>一、使用</h3><p>1.用反引号（`）表示；</p>
-<p>2.变量名写在${}中；</p>
-<a id="more"></a>
-<pre><code>// 单行字符串
-`Hello World`
+        <h3 id="一、基本用法"><a href="#一、基本用法" class="headerlink" title="一、基本用法"></a>一、基本用法</h3><pre><code>// 单个参数
+var f = function(v){
+    return v;
+};
 
-// 多行字符串
-`In JavaScript this is
- not legal.`
+var f = v =&gt; v;
 
-// 字符串中嵌入变量
-var name = &quot;Bob&quot;, time = &quot;today&quot;;
-`Hello ${name},how are you ${time}?`
 
-// 大括号内可以放入任意的JS表达式
-var x = 1, y = 2;
-`${x} + ${y*2} = ${x+y*2}` // &quot;1 + 4 = 5&quot;
-
-// 模版字符串中还能调用函数
-function fn(){
-    return &quot;Hello World&quot;;
+// 多个参数或者不需要参数
+var f = function(){retun 5;}
+var f = function(num1, num2){
+    return num1 + num2;
 }
-`foo ${fn()} bar`   // foo Hello World bar 
-</code></pre><h3 id="二、标签模版"><a href="#二、标签模版" class="headerlink" title="二、标签模版"></a>二、标签模版</h3><p><strong>模版字符串可以紧跟在一个函数后面，该函数将被调用来处理这个模版字符串。</strong></p>
-<p><strong>标签模版其实不是模版，而是函数调用的一种特殊形式。“标签”指的就是函数，紧跟在后面的模版字符串就是它的参数</strong></p>
-<pre><code>var a = 5;
-var b = 10;
 
-tag`Hello ${a+b} world ${a*b}`;
+var f = () =&gt; 5;
+var f = (num1, num2) =&gt; num1 + num2;
 
-function tag(stringArr, ...values){ // ...}
-</code></pre><p>tag函数的第一个参数是一个数组，该数组成员是模版字符串中那些没有变量替换的部分，即变量替换只发生在数组的第一个成员与第二个成员之间、第二个成员和第三个成员之间，以此类推。</p>
-<p>所以，上面的执行函数的参数为：</p>
-<ul>
-<li>第一个参数：[‘Hello ‘,’world ‘,’’]</li>
-<li>第二个参数：15</li>
-<li>第三个参数：50</li>
+&lt;!-- more --&gt;
+
+// 返回一个对象，必须在对象外面加上括号
+var getTempItem = if =&gt; ({ id: id, name: &quot;Temp&quot;});
+
+
+// 箭头与解构赋值结合
+const full = ({first, last}) =&gt; first + &apos;&apos; + last;
+function full(person){
+    return person.first + &apos;&apos; + person.last;
+}
+
+
+// 箭头函数的一个用处就是简化回调函数
+// 正常函数写法
+[1,2,3].map(function(x){
+    return x*x;
+})
+// 箭头函数写法
+[1,2,3].map(x =&gt; x*x);
+</code></pre><h3 id="二、使用注意点"><a href="#二、使用注意点" class="headerlink" title="二、使用注意点"></a>二、使用注意点</h3><ul>
+<li>函数体内的this对象就是定义时所在的对象，而不是使用时所在的对象。</li>
+<li>不可以当作构造函数。也就是说不可以使用new命令，否则会抛出一个错误。</li>
+<li>不可以使用arguments对象，该对象在函数体内不存在。如果要用，可以用rest参数代替。</li>
+<li>不可以使用yield命令，因此箭头函数不能用作Generator函数。</li>
 </ul>
-<p>即 tag([‘Hello ‘,’world ‘,’’], 15, 50);</p>
-<p><strong>标签模版的一个重要应用，就是过滤HTML字符串，防止用户输入恶意内容。</strong></p>
-<pre><code>var sender = &apos;Jason&apos;
-var message = SaferHTML`&lt;p&gt;${sender} has sent you a message.&lt;/p&gt;`;
-function SaferHTML(templateData){
-    var s = templateData[0];
-    for(var i = 1; i&lt;arguments.length; i++){
-        var arg = String(arguments[i]);
-
-        s += arg.replace(/&amp;/g, &quot;&amp;amp;&quot;)
-                    .replace(/&lt;/g, &quot;&amp;lt;&quot;)
-                    .replace(/&gt;/g, &quot;&amp;gt;&quot;);
-        s += templateData[i];
-    }
-    return s;
+<p>第一点尤其要注意。this对象的指向是可变的，但在箭头函数中它是固定的：</p>
+<pre><code>function foo() {
+    setTimeout(() =&gt; {
+        console.log(this.id);
+    },100)
 }
-console.log(message);   // &lt;p&gt;Jason has sent you a message.&lt;/p&gt;
+foo.call({id:42})
+</code></pre><p>普通函数this会指向全局对象，但是箭头函数会使this指向函数所在对象。</p>
+<p>事实上，箭头函数没有自己的this，当然也就不能使用构造函数和用call(),apply(),bind()这些方法去改变this指向，箭头函数内部的this指向外层代码块的this。</p>
+<h3 id="三、尾调用优化"><a href="#三、尾调用优化" class="headerlink" title="三、尾调用优化"></a>三、尾调用优化</h3><p><strong>什么是尾调用</strong></p>
+<p>尾调用（Tail Call）：某个函数的最后一步调用另外一个函数。</p>
+<pre><code>function f(x){
+    return g(x);
+}
+</code></pre><p>尾调用不一定要在最后一行，只要是函数的最后一部就可以了。</p>
+<pre><code>function f(x){
+    if(x &gt; 0){
+        retun m(x);
+    }
+    return n(x);
+}
+</code></pre><p>上面代码中，函数m和n都属于尾调用。</p>
+<p><strong>尾调用优化</strong></p>
+<p>函数调用的时候，会在内存形成调用记录，又称“调用帧”，保存调用位置和内部变量信息等。如果在A函数中调用B，则会在A的调用帧上方，还有一个B的调用帧。等到B运行结束，将结果返回A，B的调用帧才会消失。如果B内部有C函数的调用，那就在B上方还有个C的调用帧，以此类推。</p>
+<p>尾调用在函数的最后一步执行，所以不需要外层函数的位置及内部变量，直接用内层函数调用帧代替外层函数调用帧即可。这就叫做“尾调用优化”，即只保留内层函数的调用帧。</p>
+<p>如果所有函数都是尾调用，那么完全可以做到每次执行时调用帧只有一个，这将大大节省内存。这就是“尾调用优化”的意义。</p>
+<p>注意，只有不再用到外层函数的内部变量，内层函数的调用帧才会取代外层函数的调用帧。</p>
+<pre><code>function addOne(a){
+    var one = 1;
+    function inner(b){
+        return b+one;
+    }
+    return inner(a)
+}
+</code></pre><p>上面的函数不会进行尾调用优化，因为内层函数用到了外层函数的变量。</p>
+<p><strong>尾递归</strong></p>
+<p>函数调用自身称为递归。如果尾调用自身就是尾递归。</p>
+<p>递归非常消耗内存，因为需要同事保存成百上千个调用帧，很容易发生“栈溢出”错误（stackoverflow）。但对于尾递归，由于只存在一个调用帧，所以永远不会发生栈溢出。</p>
+<pre><code>// 下面代码是一个阶乘函数，计算n的阶乘，最多需要保留n个调用记录
+// 普通递归
+function factorial(n){
+    if (n === 1) return 1;
+    return n*factorial(n-1);
+}
+factorial(5)    // 120
+
+// 尾递归
+function factorial(n, total){
+    if(n === 1) return total;
+    return factorial(n-1, n*total);
+}
+factorial(5,1)  // 120
 </code></pre>
       
     </div>
@@ -285,18 +363,9 @@ console.log(message);   // &lt;p&gt;Jason has sent you a message.&lt;/p&gt;
     
 <nav id="article-nav">
   
-    <a href="/2016/09/02/箭头函数、尾调用优化/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption"><</strong>
-      <div class="article-nav-title">
-        
-          箭头函数、尾调用优化
-        
-      </div>
-    </a>
   
-  
-    <a href="/2016/08/23/变量的解构赋值/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">变量的解构赋值</div>
+    <a href="/2016/09/01/模版字符串（适用于字符串拼接）/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">模版字符串（适用于字符串拼接）</div>
       <strong class="article-nav-caption">></strong>
     </a>
   
@@ -331,7 +400,7 @@ console.log(message);   // &lt;p&gt;Jason has sent you a message.&lt;/p&gt;
 
 <div class="duoshuo">
 	<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="模版字符串（适用于字符串拼接）" data-title="模版字符串（适用于字符串拼接）" data-url="http://yoursite.com/2016/09/01/模版字符串（适用于字符串拼接）/"></div>
+	<div class="ds-thread" data-thread-key="箭头函数、尾调用优化" data-title="箭头函数、尾调用优化" data-url="http://yoursite.com/2016/09/02/箭头函数、尾调用优化/"></div>
 	<!-- 多说评论框 end -->
 	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 	<script type="text/javascript">

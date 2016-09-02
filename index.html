@@ -175,6 +175,157 @@
 
       <div class="body-wrap">
   
+    <article id="post-箭头函数、尾调用优化" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/09/02/箭头函数、尾调用优化/" class="article-date">
+  	<time datetime="2016-09-02T06:56:59.000Z" itemprop="datePublished">2016-09-02</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/09/02/箭头函数、尾调用优化/">箭头函数、尾调用优化</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="一、基本用法"><a href="#一、基本用法" class="headerlink" title="一、基本用法"></a>一、基本用法</h3><pre><code>// 单个参数
+var f = function(v){
+    return v;
+};
+
+var f = v =&gt; v;
+
+
+// 多个参数或者不需要参数
+var f = function(){retun 5;}
+var f = function(num1, num2){
+    return num1 + num2;
+}
+
+var f = () =&gt; 5;
+var f = (num1, num2) =&gt; num1 + num2;
+
+&lt;!-- more --&gt;
+
+// 返回一个对象，必须在对象外面加上括号
+var getTempItem = if =&gt; ({ id: id, name: &quot;Temp&quot;});
+
+
+// 箭头与解构赋值结合
+const full = ({first, last}) =&gt; first + &apos;&apos; + last;
+function full(person){
+    return person.first + &apos;&apos; + person.last;
+}
+
+
+// 箭头函数的一个用处就是简化回调函数
+// 正常函数写法
+[1,2,3].map(function(x){
+    return x*x;
+})
+// 箭头函数写法
+[1,2,3].map(x =&gt; x*x);
+</code></pre><h3 id="二、使用注意点"><a href="#二、使用注意点" class="headerlink" title="二、使用注意点"></a>二、使用注意点</h3><ul>
+<li>函数体内的this对象就是定义时所在的对象，而不是使用时所在的对象。</li>
+<li>不可以当作构造函数。也就是说不可以使用new命令，否则会抛出一个错误。</li>
+<li>不可以使用arguments对象，该对象在函数体内不存在。如果要用，可以用rest参数代替。</li>
+<li>不可以使用yield命令，因此箭头函数不能用作Generator函数。</li>
+</ul>
+<p>第一点尤其要注意。this对象的指向是可变的，但在箭头函数中它是固定的：</p>
+<pre><code>function foo() {
+    setTimeout(() =&gt; {
+        console.log(this.id);
+    },100)
+}
+foo.call({id:42})
+</code></pre><p>普通函数this会指向全局对象，但是箭头函数会使this指向函数所在对象。</p>
+<p>事实上，箭头函数没有自己的this，当然也就不能使用构造函数和用call(),apply(),bind()这些方法去改变this指向，箭头函数内部的this指向外层代码块的this。</p>
+<h3 id="三、尾调用优化"><a href="#三、尾调用优化" class="headerlink" title="三、尾调用优化"></a>三、尾调用优化</h3><p><strong>什么是尾调用</strong></p>
+<p>尾调用（Tail Call）：某个函数的最后一步调用另外一个函数。</p>
+<pre><code>function f(x){
+    return g(x);
+}
+</code></pre><p>尾调用不一定要在最后一行，只要是函数的最后一部就可以了。</p>
+<pre><code>function f(x){
+    if(x &gt; 0){
+        retun m(x);
+    }
+    return n(x);
+}
+</code></pre><p>上面代码中，函数m和n都属于尾调用。</p>
+<p><strong>尾调用优化</strong></p>
+<p>函数调用的时候，会在内存形成调用记录，又称“调用帧”，保存调用位置和内部变量信息等。如果在A函数中调用B，则会在A的调用帧上方，还有一个B的调用帧。等到B运行结束，将结果返回A，B的调用帧才会消失。如果B内部有C函数的调用，那就在B上方还有个C的调用帧，以此类推。</p>
+<p>尾调用在函数的最后一步执行，所以不需要外层函数的位置及内部变量，直接用内层函数调用帧代替外层函数调用帧即可。这就叫做“尾调用优化”，即只保留内层函数的调用帧。</p>
+<p>如果所有函数都是尾调用，那么完全可以做到每次执行时调用帧只有一个，这将大大节省内存。这就是“尾调用优化”的意义。</p>
+<p>注意，只有不再用到外层函数的内部变量，内层函数的调用帧才会取代外层函数的调用帧。</p>
+<pre><code>function addOne(a){
+    var one = 1;
+    function inner(b){
+        return b+one;
+    }
+    return inner(a)
+}
+</code></pre><p>上面的函数不会进行尾调用优化，因为内层函数用到了外层函数的变量。</p>
+<p><strong>尾递归</strong></p>
+<p>函数调用自身称为递归。如果尾调用自身就是尾递归。</p>
+<p>递归非常消耗内存，因为需要同事保存成百上千个调用帧，很容易发生“栈溢出”错误（stackoverflow）。但对于尾递归，由于只存在一个调用帧，所以永远不会发生栈溢出。</p>
+<pre><code>// 下面代码是一个阶乘函数，计算n的阶乘，最多需要保留n个调用记录
+// 普通递归
+function factorial(n){
+    if (n === 1) return 1;
+    return n*factorial(n-1);
+}
+factorial(5)    // 120
+
+// 尾递归
+function factorial(n, total){
+    if(n === 1) return total;
+    return factorial(n-1, n*total);
+}
+factorial(5,1)  // 120
+</code></pre>
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ES6/">ES6</a></li></ul>
+	</div>
+
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
     <article id="post-模版字符串（适用于字符串拼接）" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
